@@ -9,7 +9,7 @@ const getSets = async () => {
     const res = await axios.get(`${BASE_URL}/sets`, {
         headers: { "X-Api-Key": API_KEY}
     });
-    return res.data
+    return res.data.data
 }
 
 

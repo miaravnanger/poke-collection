@@ -16,6 +16,11 @@ function App() {
   return (
     <>
     <h1>Pokemon Collection</h1>
+  <ul>
+    {sets.map(set => (
+      <li key={set.id}>{set.name}</li>
+    ))}
+  </ul>
     </>
   );
 }
