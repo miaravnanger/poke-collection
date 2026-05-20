@@ -6,7 +6,7 @@ const BASE_URL = "https://api.pokemontcg.io/v2";
 
 
 const getSets = async () => {
-    const res = await axios.get(`${BASE_URL}/sets`, {
+    const res = await axios.get(`${BASE_URL}/sets?orderBy=-releaseDate`, {
         headers: { "X-Api-Key": API_KEY}
     });
     return res.data.data
