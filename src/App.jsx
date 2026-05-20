@@ -1,16 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import {useState, useEffect} from "react"
+import {getSets} from "./api/pokemonApi"
 import './App.css'
+
 function App() {
+  const [sets, setSets] = useState([])
+  
+  useEffect(() => {
+    getSets().then(data => {
+      console.log(data)
+      setSets(data)
+    }).catch(err => console.log("Feil:", err))
+  }, [])
 
 
   return (
     <>
-      <header>
-        <h1>Under construction..</h1>
-      </header>
+    <h1>Pokemon Collection</h1>
     </>
   );
 }
