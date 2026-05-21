@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { getSets } from "../api/pokemonApi";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+  const openSet = (set) => {
+    navigate(`/set/${set.id}`)
+  }
   const [sets, setSets] = useState([]);
 
   useEffect(() => {
@@ -19,7 +24,12 @@ export default function Home() {
       <ul>
         {sets.slice(0, 3).map((set) => (
           <li key={set.id}>
-            <img src={set.images.logo} alt={set.name} />
+            <img
+              src={set.images.logo}
+              alt={set.name}
+              onClick={() => openSet(set)}
+              style={{cursor: "pointer"}}
+            />
           </li>
         ))}
       </ul>

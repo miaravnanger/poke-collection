@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSets } from "../api/pokemonApi";
 
+
 export default function AllSets() {
   const [sets, setSets] = useState([]);
 

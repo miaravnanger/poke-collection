@@ -10,11 +10,9 @@ const router = createHashRouter([
     element: <App/>,
     errorElement: <h1>an error occured</h1>,
     children: [
-      {
-        index: true, element: <Home/> },
-        {path: "set/:setId", element: <SetDetail/>
-      },
-      { path: "sets", element: <AllSets/>}
+      {index: true, element: <Home/> },
+      {path: "set/:setId", element: <SetDetail/>},
+      {path: "sets", element: <AllSets/>}
     ],
     
   }
