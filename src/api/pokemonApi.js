@@ -12,6 +12,13 @@ const getSets = async () => {
     return res.data.data
 }
 
+const getSetsById = async (setId) => {
+    const res = await axios.get(`${BASE_URL}/sets/${setId}`,
+            {headers: {"X-Api-Key": API_KEY}}
+    );
+    return res.data.data
+}
+
 const getCards = async (setId) => {
     const res = await axios.get(`${BASE_URL}/cards?q=set.id:${setId}`,
         {headers: {"X-Api-Key": API_KEY}}
@@ -22,5 +29,7 @@ const getCards = async (setId) => {
 
 export {
     getSets,
-    getCards
+    getSetsById,
+    getCards,
+
 }
