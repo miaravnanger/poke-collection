@@ -8,6 +8,7 @@ export default function Home() {
     navigate(`/set/${set.id}`)
   }
   const [sets, setSets] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     getSets()
@@ -20,8 +21,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl overflow-hidden border-2 pt-15 pb-20 pr-5">
-        <h5 className="text-l md:text-3xl mb-7 ml-13 rounded-xl overflow-hidden border-2 p-3">
+      <div className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl overflow-hidden border-2 pt-15 pb-20 px-13">
+        <h5 className="text-l md:text-3xl mb-7 w-full rounded-xl overflow-hidden border-2 p-3">
           Recent drops
         </h5>
         <div className="flex flex-col items-center md:flex-row md:justify-center">
@@ -38,12 +39,34 @@ export default function Home() {
           ))}
         </div>
         <button
-          className="transition-transform duration-200 hover:opacity-60 mt-4 text-l md:text-3xl mb-7 ml-15  rounded-xl overflow-hidden border-2 p-3"
+          className="transition-transform duration-200 hover:opacity-60 mt-4 text-l md:text-3xl mb-7 w-full rounded-xl overflow-hidden border-2 p-3 text-left"
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/sets")}
+          onClick={() => setMenuOpen(!menuOpen)}
         >
           More
         </button>
+        {menuOpen && (
+          <div className="bg-amber-50 text-black w-full ">
+            {sets.slice(3, 13).map((set) => (
+              <div
+                className="transition-transform duration-200 hover:opacity-60 "
+                key={set.id}
+                onClick={() => openSet(set)}
+                style={{ cursor: "pointer" }}
+              >
+                {set.name}
+              </div>
+            ))}
+            <div className="w-full flex ">
+            <button className="transition-transform duration-200 hover:opacity-60 mt-4 text-m md:text-2xl mb-7 rounded-xl overflow-hidden border-2 p-3 bg-blue-950 text-amber-50 text-right"
+              onClick={() => navigate("/sets")}
+              style={{ cursor: "pointer" }}
+            >
+              See all
+            </button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
