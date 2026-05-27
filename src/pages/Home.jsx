@@ -9,34 +9,47 @@ export default function Home() {
   }
   const [sets, setSets] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     getSets()
       .then((data) => {
         console.log(data);
         setSets(data);
+        setIsLoading(false)
       })
-      .catch((err) => console.log("Feil:", err));
+    .catch((err) => {
+      console.log("Feil:", err);
+      setIsLoading(false);
+    });
   }, []);
 
   return (
     <>
-      <div className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl overflow-hidden border-2 pt-15 pb-20 px-13">
+      <div className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl overflow-hidden border-2 pt-15 pb-20 px-13 max-w-[900px]">
         <h5 className="text-l md:text-3xl mb-7 w-full rounded-xl overflow-hidden border-2 p-3">
           Recent drops
         </h5>
         <div className="flex flex-col items-center md:flex-row md:justify-center">
-          {sets.slice(0, 3).map((set) => (
-            <div key={set.id}>
-              <img
-                className="transition-transform duration-200 hover:scale-105"
-                src={set.images.logo}
-                alt={set.name}
-                onClick={() => openSet(set)}
-                style={{ cursor: "pointer" }}
-              />
+          {isLoading ? (
+            <div className="flex gap-24 w-[600px] justify-center py-6">
+              <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
             </div>
-          ))}
+          ) : (
+            sets.slice(0, 3).map((set) => (
+              <div key={set.id}>
+                <img
+                  className="transition-transform duration-200 hover:scale-105 w-full"
+                  src={set.images.logo}
+                  alt={set.name}
+                  onClick={() => openSet(set)}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            ))
+          )}
         </div>
         <button
           className="transition-transform duration-200 hover:opacity-60 mt-4 text-l md:text-3xl mb-7 w-full rounded-xl overflow-hidden border-2 p-3 text-left"
@@ -58,12 +71,13 @@ export default function Home() {
               </div>
             ))}
             <div className="w-full flex ">
-            <button className="transition-transform duration-200 hover:opacity-60 mt-4 text-m md:text-2xl mb-7 rounded-xl overflow-hidden border-2 p-3 bg-blue-950 text-amber-50 text-right"
-              onClick={() => navigate("/sets")}
-              style={{ cursor: "pointer" }}
-            >
-              See all
-            </button>
+              <button
+                className="transition-transform duration-200 hover:opacity-60 mt-4 text-m md:text-2xl mb-7 rounded-xl overflow-hidden border-2 p-3 bg-blue-950 text-amber-50 text-right"
+                onClick={() => navigate("/sets")}
+                style={{ cursor: "pointer" }}
+              >
+                See all
+              </button>
             </div>
           </div>
         )}
