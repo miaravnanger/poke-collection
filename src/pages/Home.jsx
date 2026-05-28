@@ -5,34 +5,34 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
   const openSet = (set) => {
-    navigate(`/set/${set.id}`)
-  }
+    navigate(`/set/${set.id}`);
+  };
   const [sets, setSets] = useState([]);
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getSets()
       .then((data) => {
         console.log(data);
         setSets(data);
-        setIsLoading(false)
+        setIsLoading(false);
       })
-    .catch((err) => {
-      console.log("Feil:", err);
-      setIsLoading(false);
-    });
+      .catch((err) => {
+        console.log("Feil:", err);
+        setIsLoading(false);
+      });
   }, []);
 
   return (
     <>
-      <div className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl overflow-hidden border-2 pt-15 pb-20 px-13 max-w-[900px]">
+      <div className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl overflow-hidden border-2 pt-15 pb-20 px-13 max-w-225">
         <h5 className="text-l md:text-3xl mb-7 w-full rounded-xl overflow-hidden border-2 p-3">
           Recent drops
         </h5>
         <div className="flex flex-col items-center md:flex-row md:justify-center">
           {isLoading ? (
-            <div className="flex gap-24 w-[600px] justify-center py-6">
+            <div className="flex gap-24 w-150 justify-center py-6">
               <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
               <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
               <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { getCards, getSetsById } from "../api/pokemonApi";
 import { useState, useEffect } from "react";
-
+import Pagination from "../components/Pagination";
 
 export default function SetDetail() {
 const {setId} = useParams()
@@ -10,18 +10,22 @@ const [cards, setCards] = useState([]);
 
 const [sets, setSets] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
+const [page, setPage] = useState(1);
+const [totalPages, setTotalPages] = useState(1);
 
 useEffect(() => {
-  getCards(setId).then((data) => {
-    console.log(data);
-    setCards(data);
-     setIsLoading(false);
+getCards(setId, page)
+  .then((data) => {
+    setCards(data.data);
+    setTotalPages(Math.ceil(data.totalCount / 20));
+    setIsLoading(false);
   })
-    .catch((err) => {
-      console.log("Feil:", err);
-      setIsLoading(false);
-    });
-}, [setId]);
+
+  .catch((err) => {
+    console.log("Feil:", err);
+    setIsLoading(false);
+  });
+}, [setId, page]);
 
 useEffect(() => {
   getSetsById(setId)
@@ -51,7 +55,7 @@ useEffect(() => {
           </div>
         </>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 m-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 m-10 mr-15 ml-15">
           {cards.map((cards) => (
             <div key={cards.id}>
               <img
@@ -64,6 +68,7 @@ useEffect(() => {
           ))}
         </div>
       )}
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </>
   );
 }
