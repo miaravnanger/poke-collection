@@ -81,6 +81,7 @@ export default function SetDetail() {
         totalPages={totalPages}
         onPageChange={(newPage) => {
           setPage(newPage);
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
     </>
