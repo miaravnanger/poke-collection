@@ -7,7 +7,7 @@ export default function Pagination({page, totalPages, onPageChange}) {
         style={{ cursor: "pointer" }}
         className="transition-transform duration-200 hover:scale-105 text-xl"
       >
-        Previous
+        Previous page
       </button>
       <span>
         {page} / {totalPages}{" "}
@@ -18,7 +18,7 @@ export default function Pagination({page, totalPages, onPageChange}) {
         style={{ cursor: "pointer" }}
         className="transition-transform duration-200 hover:scale-105 text-xl"
       >
-        Next
+        Next page
       </button>
     </div>
   );

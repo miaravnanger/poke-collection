@@ -14,13 +14,16 @@ export default function SetDetail() {
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [page]);
+
+  useEffect(() => {
     setIsLoading(true);
     getCards(setId, page)
       .then((data) => {
         setCards(data.data);
         setTotalPages(Math.ceil(data.totalCount / 20));
         setIsLoading(false);
-        window.scrollTo({ top: 0, behavior: "instant" });
       })
       .catch((err) => {
         console.log("Feil:", err);
@@ -81,7 +84,7 @@ export default function SetDetail() {
         totalPages={totalPages}
         onPageChange={(newPage) => {
           setPage(newPage);
-          window.scrollTo({ top: 0, behavior: "instant" });
+          setTimeout(() => window.scrollTo({ top: 0, behavior: "instant" }), 50);
         }}
       />
     </>
