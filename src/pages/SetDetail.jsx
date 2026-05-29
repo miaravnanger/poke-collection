@@ -20,7 +20,7 @@ export default function SetDetail() {
         setCards(data.data);
         setTotalPages(Math.ceil(data.totalCount / 20));
         setIsLoading(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: "instant" });
       })
       .catch((err) => {
         console.log("Feil:", err);
@@ -81,7 +81,7 @@ export default function SetDetail() {
         totalPages={totalPages}
         onPageChange={(newPage) => {
           setPage(newPage);
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, behavior: "instant" });
         }}
       />
     </>
