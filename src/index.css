@@ -11,6 +11,11 @@ font-family: Overskrift, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', s
   color: antiquewhite;
 }
 
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}
 
 @font-face {
   font-family: Overskrift;
