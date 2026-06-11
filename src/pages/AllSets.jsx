@@ -1,20 +1,12 @@
-import { useEffect, useState } from "react";
-import { getSets } from "../api/pokemonApi";
+import { useSets } from "../hooks/useSets";
 import { useNavigate } from "react-router-dom";
 
 export default function AllSets() {
-  const [sets, setSets] = useState([]);
+  const [sets] = useSets();
   const navigate = useNavigate();
   const openSet = (set) => navigate(`/set/${set.id}`);
 
-  useEffect(() => {
-    getSets()
-      .then((data) => {
-        console.log(data);
-        setSets(data);
-      })
-      .catch((err) => console.log("Feil:", err));
-  }, []);
+
 
   return (
     <>

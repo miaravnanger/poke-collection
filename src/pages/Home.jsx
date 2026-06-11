@@ -1,36 +1,21 @@
-import { useEffect, useState } from "react";
-import { getSets } from "../api/pokemonApi";
+import { useState } from "react";
+import { useSets } from "../hooks/useSets";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const [sets, isLoading] = useSets()
   const navigate = useNavigate();
   const openSet = (set) => {
     navigate(`/set/${set.id}`);
   };
-  const [sets, setSets] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    getSets()
-      .then((data) => {
-        console.log(data);
-        setSets(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log("Feil:", err);
-        setIsLoading(false);
-      });
-  }, []);
+ 
 
   return (
     <>
       <div
-        className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl pt-15 pb-20 px-13 max-w-225 backdrop-blur-[2px] bg-white/8 border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]
-]
-
-"
+        className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl pt-15 pb-20 px-13 max-w-225 backdrop-blur-[2px] bg-white/8 border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]"
       >
         <h5 className="text-l md:text-3xl mb-7 w-full rounded-xl overflow-hidden border-2 p-3">
           Recent drops
