@@ -15,7 +15,7 @@ export default function CardItem({ card, ownedCards, setOwnedCards }) {
         checked={ownedCards.has(card.id)}
         onChange={() => toggleCard(setOwnedCards, card.id)}
         style={{ cursor: "pointer" }}
-        className="absolute bottom-2 right-2 w-5 h-5"
+        className="absolute bottom-2 right-2 w-3.5 h-3.5 sm:w-5 sm:h-5"
       />
     </div>
   );

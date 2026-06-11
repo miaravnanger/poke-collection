@@ -14,7 +14,7 @@ export default function SetDetail() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <img src={setInfo.images?.logo} alt={setInfo.name} />
+        <img src={setInfo.images?.logo} alt={setInfo.name} className="w-48 sm:w-auto" />
       </div>
       <CardGrid
         cards={cards}
