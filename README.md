@@ -1,16 +1,49 @@
-# React + Vite
+# Pokémon Card Collection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal web app for tracking your Pokémon TCG card collection. Browse sets, view cards, and check off the ones you own.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Browse all Pokémon TCG sets
+- View cards within each set with pagination
+- Check off cards you own — saved locally in the browser
+- Responsive design for both desktop and mobile
+- Data cached in localStorage to reduce API calls
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** — UI framework
+- **Vite** — build tool and dev server
+- **Tailwind CSS** — utility-first styling
+- **React Router** — client-side routing
+- **Axios** — HTTP requests
+- **Pokémon TCG API** (pokemontcg.io) — card and set data
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+  api/          # API calls (pokemonApi.js)
+  components/   # Reusable UI components (CardGrid, CardItem, Header, Pagination)
+  hooks/        # Custom React hooks (useSets, useSetDetail, useSetInfo, useOwnedCards)
+  pages/        # Page components (Home, AllSets, SetDetail)
+  routes/       # React Router configuration
+  utils/        # Utility functions (cardUtils.js)
+  styles/       # Global CSS
+```
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Create a `.env` file in the root and add your Pokémon TCG API key:
+   ```
+   VITE_POKEMON_API_KEY=your-api-key-here
+   ```
+4. Start the dev server:
+   ```
+   npm run dev
+   ```
