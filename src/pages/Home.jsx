@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <div
-        className="flex flex-col mt-25 w-fit mx-auto items-start rounded-xl pt-15 pb-20 px-13 max-w-225 backdrop-blur-[2px] bg-white/8 border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]"
+        className="flex flex-col mt-8 sm:mt-25 w-fit mx-auto items-start rounded-xl pt-15 pb-20 px-13 max-w-225 backdrop-blur-[2px] bg-white/8 border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]"
       >
         <h5 className="text-l md:text-3xl mb-7 w-full rounded-xl overflow-hidden border-2 p-3">
           Recent drops
