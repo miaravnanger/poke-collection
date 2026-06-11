@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { getCards, getSetsById } from "../api/pokemonApi";
 import { useState, useEffect } from "react";
 import Pagination from "../components/Pagination";
+import { toggleCard } from "../utils/cardUtils";
+
 
 export default function SetDetail() {
   const { setId } = useParams();
@@ -12,7 +14,10 @@ export default function SetDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+const [ownedCards, setOwnedCards] = useState(() =>{
+  const saved = localStorage.getItem("ownedCards");
+  return saved ? new Set(JSON.parse(saved)) : new Set();
+})
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [page]);
@@ -65,14 +70,23 @@ export default function SetDetail() {
               <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
-          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 m-3">
+          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 m-8">
             {cards.map((cards) => (
-              <div key={cards.id}>
+              <div key={cards.id}
+              className="relative">
                 <img
                   src={cards.images.small}
                   alt={cards.name}
+                  onClick={()=> toggleCard(setOwnedCards, cards.id)}
                   className="transition-transform duration-200 hover:scale-105"
                   style={{ cursor: "pointer" }}
+                />
+                <input
+                  type="checkbox"
+                  checked={ownedCards.has(cards.id)}
+                  onChange={() => toggleCard(setOwnedCards, cards.id)}
+                  style={{ cursor: "pointer" }}
+                  className="absolute bottom-2 right-2 w-5 h-5"
                 />
               </div>
             ))}
@@ -84,7 +98,10 @@ export default function SetDetail() {
         totalPages={totalPages}
         onPageChange={(newPage) => {
           setPage(newPage);
-          setTimeout(() => window.scrollTo({ top: 0, behavior: "instant" }), 50);
+          setTimeout(
+            () => window.scrollTo({ top: 0, behavior: "instant" }),
+            50,
+          );
         }}
       />
     </>
