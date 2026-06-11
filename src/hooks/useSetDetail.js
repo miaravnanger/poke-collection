@@ -15,7 +15,13 @@ export function useSetDetail(setId) {
     setIsLoading(true);
     getCards(setId, page)
       .then((data) => {
-        setCards(data.data);
+        const sorted = [...data.data].sort((a, b) => {
+          const aNum = parseInt(a.number);
+          const bNum = parseInt(b.number);
+          if (!isNaN(aNum) && !isNaN(bNum)) return aNum - bNum;
+          return a.number.localeCompare(b.number);
+        });
+        setCards(sorted);
         setTotalPages(Math.ceil(data.totalCount / 20));
         setIsLoading(false);
       })
